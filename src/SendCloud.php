@@ -62,6 +62,25 @@ class SendCloud extends Plugin
      */
     public $schemaVersion = '1.0.0';
 
+    protected function beforeInstall(): bool
+    {
+        if (!Craft::$app->plugins->isPluginInstalled('commerce')) {
+            Craft::error(Craft::t(
+                'send-cloud',
+                'Failed to install. Craft Commerce is required.'
+            ));
+            return false;
+        }
+        if (!Craft::$app->plugins->isPluginEnabled('commerce')) {
+            Craft::error(Craft::t(
+                'send-cloud',
+                'Failed to install. Craft Commerce is required.'
+            ));
+            return false;
+        }
+        return true;
+    }
+
     // Public Methods
     // =========================================================================
     public function init()
