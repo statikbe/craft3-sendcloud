@@ -12,6 +12,8 @@ namespace studioespresso\sendcloud;
 
 use Craft;
 use craft\base\Plugin;
+use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
+use craft\commerce\services\ShippingMethods;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
 use craft\web\UrlManager;
@@ -19,6 +21,7 @@ use craft\services\Dashboard;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 
+use studioespresso\sendcloud\models\SendCloudShippingMethod;
 use studioespresso\sendcloud\models\Settings;
 use yii\base\Event;
 
@@ -87,23 +90,9 @@ class SendCloud extends Plugin
     {
         parent::init();
 
-        // Register our CP routes
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['cpActionTrigger1'] = 'send-cloud/default/do-something';
-            }
-        );
-
-        // Register our widgets
-        Event::on(
-            Dashboard::class,
-            Dashboard::EVENT_REGISTER_WIDGET_TYPES,
-            function (RegisterComponentTypesEvent $event) {
-                $event->types[] = SendCloudWidgetWidget::class;
-            }
-        );
+        Event::on(ShippingMethods::class, ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS, function(RegisterAvailableShippingMethodsEvent $event) {
+            $event->shippingMethods[] = new SendCloudShippingMethod();
+        });
 
         // Do something after we're installed
         Event::on(
