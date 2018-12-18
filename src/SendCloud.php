@@ -16,6 +16,7 @@ use craft\commerce\elements\Order;
 use craft\commerce\events\OrderStatusEvent;
 use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
 use craft\commerce\services\ShippingMethods;
+use craft\log\FileTarget;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
 use craft\web\UrlManager;
@@ -23,6 +24,7 @@ use craft\services\Dashboard;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 
+use studioespresso\sendcloud\base\PluginTrait;
 use studioespresso\sendcloud\models\SendCloudShippingMethod;
 use studioespresso\sendcloud\models\Settings;
 use yii\base\Event;
@@ -46,26 +48,13 @@ use yii\base\Event;
  */
 class SendCloud extends Plugin
 {
-    // Static Properties
-    // =========================================================================
-
-    /**
-     * Static property that is an instance of this plugin class so that it can be accessed via
-     * SendCloud::$plugin
-     *
-     * @var SendCloud
-     */
-    public static $plugin;
-
     // Public Properties
     // =========================================================================
-
-    /**
-     * To execute your plugin’s migrations, you’ll need to increase its schema version.
-     *
-     * @var string
-     */
     public $schemaVersion = '1.0.0';
+
+    // Traits
+    // =========================================================================
+    use PluginTrait;
 
     protected function beforeInstall(): bool
     {
@@ -92,6 +81,15 @@ class SendCloud extends Plugin
     {
         parent::init();
 
+        self::$plugin = $this;
+        $this->setPluginComponents();
+
+        $fileTarget = new FileTarget([
+            'logFile' => Craft::$app->path->getLogPath() . '/sendcloud.log',
+            'categories' => ['sendcloud']
+        ]);
+        Craft::getLogger()->dispatcher->targets[] = $fileTarget;
+
         Event::on(
             Order::class,
             Order::EVENT_AFTER_COMPLETE_ORDER,
@@ -99,6 +97,7 @@ class SendCloud extends Plugin
                 if($this->getSettings()->shippingMethod != $event->sender->shippingMethodHandle) {
                     return false;
                 }
+                SendCloud::info('Order matched, off to Sendcloud');
             }
         );
         // Do something after we're installed
@@ -113,6 +112,22 @@ class SendCloud extends Plugin
         );
     }
 
+    public static function info($message)
+    {
+        Craft::getLogger()->log($message, \yii\log\Logger::LEVEL_INFO, 'sendcloud');
+    }
+    
+    public static function warning($message)
+    {
+        Craft::getLogger()->log($message, \yii\log\Logger::LEVEL_WARNING, 'sendcloud');
+    }
+
+    public static function error($message)
+    {
+        Craft::getLogger()->log($message, \yii\log\Logger::LEVEL_ERROR, 'sendcloud');
+    }
+    
+    
     // Protected Methods
     // =========================================================================
     protected function createSettingsModel()
