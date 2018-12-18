@@ -43,6 +43,8 @@ class Settings extends Model
 
     public $sendcloudSecret;
 
+    public $shippingMethod;
+
     // Public Methods
     // =========================================================================
 
@@ -61,6 +63,7 @@ class Settings extends Model
         return [
             ['sendcloudKey', 'string'],
             ['sendcloudSecret', 'string'],
+            ['shippingMethod', 'string'],
         ];
     }
 }

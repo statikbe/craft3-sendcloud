@@ -1,0 +1,36 @@
+{% from "send-cloud/_includes/_macro.twig" import configWarning %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+
+    {{ forms.textField({
+        label: "API key"|t("send-cloud"),
+        id: "sendcloudKey",
+        name: "sendcloudKey",
+        value: settings.sendcloudKey,
+        warning: configWarning("sendcloudKey", "send-cloud"),
+        errors: settings.getErrors("sendcloudKey"),
+    }) }}
+
+    {{ forms.textField({
+        label: "API Secret"|t("send-cloud"),
+        id: "sendcloudSecret",
+        name: "sendcloudSecret",
+        value: settings.sendcloudSecret,
+        warning: configWarning("sendcloudSecret", "send-cloud"),
+        errors: settings.getErrors("sendcloudSecret"),
+    }) }}
+
+    {{ forms.selectField({
+        label: "Connected shipping method"|t("send-cloud"),
+        id: "shippingMethod",
+        name: "shippingMethod",
+        options: shippingMethods,
+        value: settings.shippingMethod,
+        warning: configWarning("shippingMethod", "send-cloud"),
+        errors: settings.getErrors("shippingMethod"),
+    }) }}
+
+{% endblock %}

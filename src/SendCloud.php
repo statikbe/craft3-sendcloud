@@ -12,6 +12,8 @@ namespace studioespresso\sendcloud;
 
 use Craft;
 use craft\base\Plugin;
+use craft\commerce\elements\Order;
+use craft\commerce\events\OrderStatusEvent;
 use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
 use craft\commerce\services\ShippingMethods;
 use craft\services\Plugins;
@@ -90,10 +92,15 @@ class SendCloud extends Plugin
     {
         parent::init();
 
-        Event::on(ShippingMethods::class, ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS, function(RegisterAvailableShippingMethodsEvent $event) {
-            $event->shippingMethods[] = new SendCloudShippingMethod();
-        });
-
+        Event::on(
+            Order::class,
+            Order::EVENT_AFTER_COMPLETE_ORDER,
+            function(Event $event) {
+                if($this->getSettings()->shippingMethod != $event->sender->shippingMethodHandle) {
+                    return false;
+                }
+            }
+        );
         // Do something after we're installed
         Event::on(
             Plugins::class,
@@ -115,10 +122,17 @@ class SendCloud extends Plugin
 
     protected function settingsHtml(): string
     {
+        $shippingMethods = new ShippingMethods;
+        $methods = [];
+        $methods[''] = '---';
+        foreach ($shippingMethods->getAllShippingMethods() as $method) {
+            $methods[$method->handle] = $method->name;
+        }
         return Craft::$app->view->renderTemplate(
-            'send-cloud/settings/_index',
+            'send-cloud/_settings/_index',
             [
-                'settings' => $this->getSettings()
+                'settings' => $this->getSettings(),
+                'shippingMethods' => $methods,
             ]
         );
     }
