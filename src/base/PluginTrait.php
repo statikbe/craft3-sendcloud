@@ -1,6 +1,6 @@
 <?php
 
-namespace studioespresso\sendcloud\base;
+namespace statikbe\sendcloud\base;
 
 use Craft;
 

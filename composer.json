@@ -1,5 +1,5 @@
 {
-    "name": "studioespresso/craft-sendcloud",
+    "name": "statikbe/craft-sendcloud",
     "description": "Integrate Craft Commerce with SendCloud",
     "type": "craft-plugin",
     "version": "1.0.0",
@@ -11,14 +11,14 @@
         "sendcloud"
     ],
     "support": {
-        "docs": "https://github.com/studioespresso/craft-3sendcloud/blob/master/README.md",
-        "issues": "https://github.com/studioespresso/craft-3sendcloud/issues"
+        "docs": "https://github.com/statikbe/craft-3sendcloud/blob/master/README.md",
+        "issues": "https://github.com/statikbe/craft-3sendcloud/issues"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Studio Espresso",
-            "homepage": "https://www.studioespresso.co"
+            "name": "Statik",
+            "homepage": "https://www.statikbe.co"
         }
     ],
     "require": {
@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-          "studioespresso\\sendcloud\\": "src/"
+          "statikbe\\sendcloud\\": "src/"
         }
     },
     "extra": {
@@ -35,7 +35,7 @@
         "handle": "send-cloud",
         "hasCpSettings": true,
         "hasCpSection": true,
-        "changelogUrl": "https://raw.githubusercontent.com/studioespresso/craft-3sendcloud/master/CHANGELOG.md",
-        "class": "studioespresso\\sendcloud\\SendCloud"
+        "changelogUrl": "https://raw.githubusercontent.com/statikbe/craft-3sendcloud/master/CHANGELOG.md",
+        "class": "statikbe\\sendcloud\\SendCloud"
     }
 }

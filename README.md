@@ -18,8 +18,8 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require studioespresso/craft-sendcloud
+        composer require statikbe/craft-sendcloud
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for SendCloud.
 
-Brought to you by [Studio Espresso](https://www.studioespresso.co)
+Brought to you by [Statik](https://www.statik.be)

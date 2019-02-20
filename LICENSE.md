@@ -1,4 +1,4 @@
-Copyright © Studio Espresso
+Copyright © Statik
 
 
 Permission is hereby granted to any person obtaining a copy of this software

@@ -4,13 +4,13 @@
  *
  * Integrate Craft Commerce with SendCloud
  *
- * @link      https://www.studioespresso.co
- * @copyright Copyright (c) 2018 Studio Espresso
+ * @link      https://www.statik.be
+ * @copyright Copyright (c) 2018 Statik
  */
 
-namespace studioespresso\sendcloud\models;
+namespace statikbe\sendcloud\models;
 
-use studioespresso\sendcloud\SendCloud;
+use statikbe\sendcloud\SendCloud;
 
 use Craft;
 use craft\base\Model;
@@ -25,7 +25,7 @@ use craft\base\Model;
  *
  * https://craftcms.com/docs/plugins/models
  *
- * @author    Studio Espresso
+ * @author    Statik
  * @package   SendCloud
  * @since     1.0.0
  */

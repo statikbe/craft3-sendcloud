@@ -4,11 +4,11 @@
  *
  * Integrate Craft Commerce with SendCloud
  *
- * @link      https://www.studioespresso.co
- * @copyright Copyright (c) 2018 Studio Espresso
+ * @link      https://www.statik.be
+ * @copyright Copyright (c) 2018 Statik
  */
 
-namespace studioespresso\sendcloud;
+namespace statikbe\sendcloud;
 
 use Craft;
 use craft\base\Plugin;
@@ -24,9 +24,9 @@ use craft\services\Dashboard;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 
-use studioespresso\sendcloud\base\PluginTrait;
-use studioespresso\sendcloud\models\SendCloudShippingMethod;
-use studioespresso\sendcloud\models\Settings;
+use statikbe\sendcloud\base\PluginTrait;
+use statikbe\sendcloud\models\SendCloudShippingMethod;
+use statikbe\sendcloud\models\Settings;
 use yii\base\Event;
 
 /**
@@ -39,7 +39,7 @@ use yii\base\Event;
  *
  * https://craftcms.com/docs/plugins/introduction
  *
- * @author    Studio Espresso
+ * @author    Statik
  * @package   SendCloud
  * @since     1.0.0
  *
