@@ -3,6 +3,8 @@
 namespace statikbe\sendcloud\base;
 
 use Craft;
+use statikbe\sendcloud\services\SendCloud;
+
 
 trait PluginTrait
 {
@@ -15,7 +17,7 @@ trait PluginTrait
     private function setPluginComponents()
     {
         $this->setComponents([
-
+            'api' => SendCloud::class
         ]);
     }
 

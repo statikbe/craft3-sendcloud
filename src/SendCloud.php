@@ -98,6 +98,8 @@ class SendCloud extends Plugin
                     return false;
                 }
                 SendCloud::info('Order matched, off to Sendcloud');
+                SendCloud::$plugin->api->createPackage($order);
+
             }
         );
         // Do something after we're installed
