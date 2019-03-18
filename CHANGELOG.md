@@ -7,3 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 1.0.0 - 2018-10-20
 ### Added
 - Initial release
+
+## 1.1.0 - 2019-03-18
+### Fixed
+- Fixed missing house_number with SendCloud API integration

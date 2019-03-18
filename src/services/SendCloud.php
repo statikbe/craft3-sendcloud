@@ -30,10 +30,10 @@ class SendCloud extends Component
         $parcel->name = $shippingAddress->firstName . ' ' . $shippingAddress->lastName;
         $parcel->email = $order->email;
         $parcel->company_name = $shippingAddress->businessName;
-        $parcel->address = $shippingAddress->address1;
-        $parcel->address2 = $shippingAddress->address2;
-        $parcel->city = $shippingAddress->city;
+        $parcel->address = $shippingAddress->address1 . ' ' . $shippingAddress->address2;
         $parcel->postal_code = $shippingAddress->zipCode;
+        $parcel->city = $shippingAddress->city;
+        $parcel->phone = $shippingAddress->phone;
 
         $countries = new Countries();
         $country = $countries->getCountryById($shippingAddress->countryId);
